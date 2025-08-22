@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Smile, Users, ShieldAlert, Thermometer, AirVent, Volume2 } from 'lucide-react';
 import { MoodChart } from '@/components/dashboard/mood-chart';
 import { ParticipationChart } from '@/components/dashboard/participation-chart';
+import { NoiseChart } from '@/components/dashboard/noise-chart';
 
 export default function DashboardPage() {
   return (
@@ -101,6 +102,16 @@ export default function DashboardPage() {
           <CardContent>
             <MoodChart />
           </CardContent>
+        </Card>
+      </div>
+      <div className="grid gap-4">
+        <Card>
+            <CardHeader>
+                <CardTitle>Noise Levels (Hertz)</CardTitle>
+            </CardHeader>
+            <CardContent>
+                <NoiseChart />
+            </CardContent>
         </Card>
       </div>
     </main>

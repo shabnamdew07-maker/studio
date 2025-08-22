@@ -1,4 +1,3 @@
-
 "use client";
 
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
@@ -29,7 +28,7 @@ const chartConfig = {
 
 export function NoiseChart() {
   return (
-    <ChartContainer config={chartConfig} className="h-[150px] w-full">
+    <ChartContainer config={chartConfig} className="h-[200px] w-full">
       <LineChart
         accessibilityLayer
         data={chartData}

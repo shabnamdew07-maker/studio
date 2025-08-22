@@ -30,10 +30,14 @@ import {
   Users,
   ShieldAlert,
   Ear,
+  Loader2,
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { NoiseChart } from '@/components/login/noise-chart';
 import Link from 'next/link';
+import { addUserToFirestore } from '@/lib/actions';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
   username: z.string().min(2, 'Username must be at least 2 characters.'),
@@ -43,6 +47,8 @@ const loginSchema = z.object({
 
 export default function LoginPage() {
   const { toast } = useToast();
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -52,13 +58,24 @@ export default function LoginPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginSchema>) {
-    console.log(values);
-    toast({
-      title: 'Login Successful',
-      description: 'Welcome to GatherWell!',
-    });
-    form.reset();
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
+    setIsLoading(true);
+    const result = await addUserToFirestore(values);
+    setIsLoading(false);
+    if (result.success) {
+      toast({
+        title: 'Login Successful',
+        description: 'Your details have been saved.',
+      });
+      form.reset();
+      router.push('/dashboard');
+    } else {
+      toast({
+        title: 'Login Failed',
+        description: result.error,
+        variant: 'destructive',
+      });
+    }
   }
 
   return (
@@ -120,7 +137,8 @@ export default function LoginPage() {
                       </FormItem>
                     )}
                   />
-                   <Button type="submit" className="w-full">
+                   <Button type="submit" className="w-full" disabled={isLoading}>
+                     {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                      Login
                    </Button>
                 </CardContent>

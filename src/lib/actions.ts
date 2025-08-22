@@ -19,6 +19,7 @@ export async function getRecommendationsAction(
 
 export async function addUserToFirestore(userData: {
   username: string;
+  email: string;
   mobile: string;
   age: number;
 }) {

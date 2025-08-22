@@ -28,6 +28,7 @@ import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
   username: z.string().min(2, 'Username must be at least 2 characters.'),
+  email: z.string().email('Please enter a valid email address.'),
   mobile: z.string().regex(/^\d{10}$/, 'Please enter a valid 10-digit mobile number.'),
   age: z.coerce.number().min(1, 'Please enter a valid age.'),
 });
@@ -40,6 +41,7 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       username: '',
+      email: '',
       mobile: '',
       age: 0,
     },
@@ -85,6 +87,19 @@ export default function LoginPage() {
                     <FormLabel>Username</FormLabel>
                     <FormControl>
                       <Input placeholder="Your username" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input placeholder="your.email@example.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

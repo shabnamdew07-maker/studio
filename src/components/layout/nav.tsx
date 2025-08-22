@@ -9,6 +9,8 @@ import {
   Map,
   ShieldAlert,
   Sparkles,
+  LogIn,
+  LogOut,
 } from 'lucide-react';
 
 import {
@@ -19,12 +21,14 @@ import {
 import Link from 'next/link';
 
 const navItems = [
+  { href: '/login', icon: LogIn, label: 'Login' },
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/map', icon: Map, label: 'Event Map' },
   { href: '/recommendations', icon: Sparkles, label: 'Recommendations' },
   { href: '/alerts', icon: Bell, label: 'Alerts' },
   { href: '/report', icon: ShieldAlert, label: 'Report Incident' },
   { href: '/resources', icon: BookOpen, label: 'Resources' },
+  { href: '/signout', icon: LogOut, label: 'Sign Out' },
 ];
 
 export function Nav({ isMobile = false }: { isMobile?: boolean }) {

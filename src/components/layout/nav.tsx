@@ -11,6 +11,7 @@ import {
   Sparkles,
   LogIn,
   LogOut,
+  Ticket,
 } from 'lucide-react';
 
 import {
@@ -24,6 +25,7 @@ const navItems = [
   { href: '/login', icon: LogIn, label: 'Login' },
   { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { href: '/map', icon: Map, label: 'Event Map' },
+  { href: '/shows', icon: Ticket, label: 'Shows' },
   { href: '/recommendations', icon: Sparkles, label: 'Recommendations' },
   { href: '/alerts', icon: Bell, label: 'Alerts' },
   { href: '/report', icon: ShieldAlert, label: 'Report Incident' },
